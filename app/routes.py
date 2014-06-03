@@ -4,13 +4,18 @@ from forms import NameForm
 app = Flask(__name__)
 app.secret_key = "gooblegobble"
 
+@app.before_request
+def func():
+  session.modified = True
+
 @app.route('/')
-def home():
+@app.route('/index')
+def index():
     if 'name' in session:
         name = session['name']
+        return render_template('index.html', name = name)
     else:
-        name = None
-    return render_template('home.html', name = name)
+        return redirect(url_for('login'))
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -18,7 +23,7 @@ def login():
     
     if request.method == 'POST':
         session['name'] = form.name.data
-        return redirect(url_for('home'))
+        return redirect(url_for('index'))
     elif request.method == 'GET':
         return render_template('login.html', form=form)
 
