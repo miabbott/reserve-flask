@@ -1,11 +1,10 @@
 from flask import Flask, render_template, session, request, redirect, url_for
+from flask.ext.sqlalchemy import SQLAlchemy
 from forms import NameForm
-
-app = Flask(__name__)
-app.secret_key = "gooblegobble"
+from app import app, db
 
 @app.before_request
-def func():
+def modify():
   session.modified = True
 
 @app.route('/')
@@ -26,6 +25,3 @@ def login():
         return redirect(url_for('index'))
     elif request.method == 'GET':
         return render_template('login.html', form=form)
-
-if __name__ == '__main__':
-  app.run(debug=True)
