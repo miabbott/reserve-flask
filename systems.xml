@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SYSTEMS>
+    <DEVICE host_name="ban67uut118" host_type="X4170 M3" host_ip="10.153.58.118"
+            host_location="BUR03" sp_name="ban67uut118sp" sp_ip="10.153.59.118"
+            console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut118"
+            apc_url="http://ban67uut118" apc_user="ban67u120" apc_passwd="ssm" />
+    <DEVICE host_name="ban67uut120" host_type="X2370 M3" host_ip="10.153.58.120"
+            host_location="BUR03" sp_name="ban67uut120sp" sp_ip="10.153.59.120"
+            console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut120"
+            apc_url="http://ban67uut120" apc_user="ban67u120" apc_passwd="ssm" />
+    <DEVICE host_name="ban67uut122" host_type="X4370 M3" host_ip="10.153.58.122"
+            host_location="BUR03" sp_name="ban67uut122sp" sp_ip="10.153.59.122"
+            console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut122"
+            apc_url="http://ban67uut122" apc_user="ban67u122" apc_passwd="ssm" />
+</SYSTEMS>
