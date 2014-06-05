@@ -1,12 +1,25 @@
 #!/usr/bin/env python
 
+from optparse import OptionParser
 import xml.etree.ElementTree as ET
 import sys
 from app import db, models
 
-input_xml = sys.argv[1]
+usage = "usage: %prog [options] filename"
+parser = OptionParser(usage=usage)
+parser.add_option("-i", "--init", dest="init", action="store_true",
+                      help="Initialize DB by dropping all tables")
+(options, args) = parser.parse_args()
 
-tree = ET.parse(input_xml)
+if len(args) != 1:
+    parser.error("Must supply a XML file")
+
+if options.init:
+    db.drop_all()
+    db.session.commit()
+    db.create_all()
+
+tree = ET.parse(args[0])
 systems = tree.getroot()
 
 # get host info
@@ -36,8 +49,11 @@ for device in systems:
     if "apc_passwd" in device_attribs:
         db_device.apc_passwd = device_attribs["apc_passwd"]
 
-    db.session.add(db_device)
-    db.session.commit()
+    if models.System.query.filter_by(host_name=db_device.host_name).first() is None:
+        db.session.add(db_device)
+        db.session.commit()
+    else:
+        print "Detected existing row; skipping host_name: " + db_device.host_name
 
 
 

@@ -1,0 +1,26 @@
+<thead>
+    <tr>
+        <th />
+        {% for sys in systems %}
+        <th>{{ sys.host_name }}<br />
+            {{ sys.host_ip }}<br />
+            {{ sys.sp_name }}<br />
+            {{ sys.sp_ip }}<br />
+        </th>
+        {% endfor %}
+        <th />
+    </tr>
+</thead>
+<tfoot>
+    <tr>
+        <td />
+        {% for sys in systems %}
+        <td class="foot">{{ sys.host_name }}<br />
+            {{ sys.host_ip }}<br />
+            {{ sys.sp_name }}<br />
+            {{ sys.sp_ip }}<br />
+        </td>
+        {% endfor %}
+        <td />    
+    </tr>
+</tfoot>
