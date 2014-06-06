@@ -17,7 +17,9 @@ class System(db.Model):
 
 class Reservation(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    start_time = db.Column(db.DateTime)
-    end_time = db.Column(db.DateTime)
+    start_date = db.Column(db.Date)
+    start_time = db.Column(db.Time)
+    end_date = db.Column(db.Date)
+    end_time = db.Column(db.Time)
     reserved_by = db.Column(db.String, index = True)
     system_id = db.Column(db.Integer, db.ForeignKey('system.id'))

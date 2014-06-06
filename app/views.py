@@ -14,7 +14,7 @@ def modify():
 def index():
     if 'name' in session:
         name = session['name']
-        return render_template('index.html', name = name)
+        return redirect(url_for('reserve'))
     else:
         return redirect(url_for('login'))
 
@@ -24,7 +24,7 @@ def login():
     
     if request.method == 'POST':
         session['name'] = form.name.data
-        return redirect(url_for('index'))
+        return redirect(url_for('reserve'))
     elif request.method == 'GET':
         return render_template('login.html', form=form)
 
