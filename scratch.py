@@ -25,17 +25,19 @@ for hr in range(24):
 
 #print hour_list
 
-matrix = []
+matrix = {}
 for h in hour_list:
-    h_row = [h.strftime("%H:%M %p")]
+    #h_row = [h.strftime("%H:%M %p")]
+    h_row = []
     for sys in systems:
         res = sys.is_reserved(date=date(2014, 6, 10), time=h)
         if res is not None:
             h_row.append(res)
         else:
             h_row.append(None)
-    h_row.append(h.strftime("%H:%M %p"))
-    matrix.append(h_row)
+    #h_row.append(h.strftime("%H:%M %p"))
+    zipped = zip(systems, h_row)
+    matrix[h] = zipped
 
-for row in matrix:
-    print ' '.join(row)
+for k in sorted(matrix.keys()):
+    print k, matrix[k]

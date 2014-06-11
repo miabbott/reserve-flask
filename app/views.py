@@ -56,16 +56,18 @@ def hours(date_str = None):
         new_t = start_t + timedelta(hours=hr)
         hour_list.append(new_t.time())
         
-    matrix = []
+    matrix = {}
     for h in hour_list:
-        h_row = [h.strftime("%H:%M %p")]
+        #h_row = [h.strftime("%H:%M %p")]
+        h_row = []
         for sys in systems:
             res = sys.is_reserved(date=date_str, time=h)
             if res is not None:
                 h_row.append(res)
             else:
                 h_row.append(None)
-        h_row.append(h.strftime("%H:%M %p"))
-        matrix.append(h_row)
+        #h_row.append(h.strftime("%H:%M %p"))
+        zipped = zip(systems, h_row)
+        matrix[h] = zipped
 
     return render_template('hours.html', hour_list=hour_list, systems=systems, matrix=matrix)

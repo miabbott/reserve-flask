@@ -1,7 +1,13 @@
-{% for row in matrix %}
+{% for hr in hour_list %}
     <tr>
-    {% for entry in row %}
-        <td>{{ entry }}</td>
-    {% endfor %}
+        <td>{{ hr.strftime("%H:%M %p") }}</td>
+        {% for sys,res in matrix[hr] %}
+            {% if res == None %}
+                <td> 1 2 3 </td>
+            {% else %}
+                <td>{{ res }}</td>
+            {% endif %}
+        {% endfor %}
+        <td>{{ hr.strftime("%H:%M %p") }}</td>
     </tr>
 {% endfor %}
