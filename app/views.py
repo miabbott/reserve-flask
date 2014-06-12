@@ -14,7 +14,7 @@ def modify():
 def index():
     if 'name' in session:
         name = session['name']
-        return redirect(url_for('reserve'))
+        return redirect(url_for('hours'))
     else:
         return redirect(url_for('login'))
 
@@ -28,7 +28,24 @@ def login():
     elif request.method == 'GET':
         return render_template('login.html', form=form)
 
-#@app.route('/reserve')
+@app.route('/reserve/')
+def reserve():
+    system_id = request.args.get('system')
+    system = System.query.get(system_id)
+    start_time = time(int(request.args.get('start_time')))
+    hours = request.args.get('hours')
+    
+    start_date = date.today()
+    end_date = date.today()
+    end_time = (datetime.combine(start_date, start_time) + timedelta(hours=int(hours))).time()
+    reserved_by = session['name']
+    
+    r = Reservation(start_date=start_date, start_time=start_time, end_date=end_date, end_time=end_time, reserved_by=reserved_by, device=system)
+    db.session.add(r)
+    db.session.commit()
+    
+    return redirect(url_for('hours'))
+
 #@app.route('/reserve/<date>')
 #def reserve(date = date.today()):
 #    systems = System.query.all()
@@ -58,7 +75,6 @@ def hours(date_str = None):
         
     matrix = {}
     for h in hour_list:
-        #h_row = [h.strftime("%H:%M %p")]
         h_row = []
         for sys in systems:
             res = sys.is_reserved(date=date_str, time=h)
@@ -66,7 +82,6 @@ def hours(date_str = None):
                 h_row.append(res)
             else:
                 h_row.append(None)
-        #h_row.append(h.strftime("%H:%M %p"))
         zipped = zip(systems, h_row)
         matrix[h] = zipped
 

@@ -12,32 +12,34 @@ from datetime import date, time, datetime, timedelta
 
 #print b118.reservations.filter(Reservation.start_date == start_d).all()
 
-#print Reservation.query.all()
+print Reservation.query.all()
+
 
 #print b118.is_reserved(date=start_d, time=time)
 
-systems = System.query.all()
-hour_list = []
-start_t = datetime.combine(date.today(), time(hour=18))
-for hr in range(24):
-    new_t = start_t + timedelta(hours=hr)
-    hour_list.append(new_t.time())
-
-#print hour_list
-
-matrix = {}
-for h in hour_list:
-    #h_row = [h.strftime("%H:%M %p")]
-    h_row = []
-    for sys in systems:
-        res = sys.is_reserved(date=date(2014, 6, 10), time=h)
-        if res is not None:
-            h_row.append(res)
-        else:
-            h_row.append(None)
-    #h_row.append(h.strftime("%H:%M %p"))
-    zipped = zip(systems, h_row)
-    matrix[h] = zipped
-
-for k in sorted(matrix.keys()):
-    print k, matrix[k]
+#systems = System.query.all()
+#hour_list = []
+#start_t = datetime.combine(date.today(), time(hour=18))
+#for hr in range(24):
+#    new_t = start_t + timedelta(hours=hr)
+#    hour_list.append(new_t.time())
+#
+##print hour_list
+#
+#matrix = {}
+#for h in hour_list:
+#    #h_row = [h.strftime("%H:%M %p")]
+#    h_row = []
+#    for sys in systems:
+#        res = sys.is_reserved(date=date(2014, 6, 10), time=h)
+#        if res is not None:
+#            h_row.append(res)
+#        else:
+#            h_row.append(None)
+#    #h_row.append(h.strftime("%H:%M %p"))
+#    zipped = zip(systems, h_row)
+#    matrix[h] = zipped
+#
+#for k in sorted(matrix.keys()):
+#    for l in matrix[k]:
+#        print l

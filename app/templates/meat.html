@@ -3,7 +3,11 @@
         <td>{{ hr.strftime("%H:%M %p") }}</td>
         {% for sys,res in matrix[hr] %}
             {% if res == None %}
-                <td> 1 2 3 </td>
+                <td>
+                    <a href="{{ url_for('reserve', system = sys.id, start_time = hr.strftime("%H"), hours = 0) }}">1</a>
+                    <a href="{{ url_for('reserve', system = sys.id, start_time = hr.strftime("%H"), hours = 1) }}">2</a>
+                    <a href="{{ url_for('reserve', system = sys.id, start_time = hr.strftime("%H"), hours = 2) }}">3</a>
+                </td>
             {% else %}
                 <td>{{ res }}</td>
             {% endif %}
