@@ -12,7 +12,8 @@ from datetime import date, time, datetime, timedelta
 
 #print b118.reservations.filter(Reservation.start_date == start_d).all()
 
-print Reservation.query.all()
+print System.query.all()
+#print Reservation.query.all()
 
 
 #print b118.is_reserved(date=start_d, time=time)

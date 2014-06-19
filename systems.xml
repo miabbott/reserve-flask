@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SYSTEMS>
-    <DEVICE host_name="ban67uut118" host_type="X4170 M3" host_ip="10.153.58.118"
+    <DEVICE host_name="ban67uut060" host_type="X4-8" host_ip="10.153.58.60"
+            host_location="BUR03" sp_name="ban67uut060sp" sp_ip="10.153.59.60"
+            console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut060" />
+    <DEVICE host_name="ban67uut090" host_type="SPARC T3-1" host_ip="10.153.58.90"
+            host_location="BUR03" sp_name="ban67uut090sp" sp_ip="10.153.59.90"
+            console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut090"
+            apc_url="http://ban67uut090apc" apc_user="ban67u090" apc_passwd="ssm" />
+    <DEVICE host_name="ban67uut096" host_type="X5-2 Aspen" host_ip="10.153.58.96"
+            host_location="BUR03" sp_name="ban67uut096sp" sp_ip="10.153.59.96"
+            console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut096"
+            apc_url="http://ban67uut096apc" apc_user="ban67u096" apc_passwd="ssm" />
+    <DEVICE host_name="ban67uut098" host_type="X4170 M3" host_ip="10.153.58.98"
+            host_location="BUR03" sp_name="ban67uut098sp" sp_ip="10.153.59.98"
+            console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut098"
+            apc_url="http://ban67uut098apc" apc_user="ban67u098" apc_passwd="ssm" />
+    <DEVICE host_name="ban67uut100" host_type="X4-4" host_ip="10.153.58.100"
+            host_location="BUR03" sp_name="ban67uut100sp" sp_ip="10.153.59.100"
+            console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut100"
+            apc_url="http://ban67uut100apc" apc_user="ban67u100" apc_passwd="ssm" />
+    <DEVICE host_name="ban67uut108" host_type="X5-2 Estes" host_ip="10.153.58.108"
+            host_location="BUR03" sp_name="ban67uut108sp" sp_ip="10.153.59.108"
+            console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut108"
+            apc_url="http://ban67uut108apc" apc_user="ban67u108" apc_passwd="ssm" />
+    <DEVICE host_name="ban67uut112" host_type="X5-2 Aspen" host_ip="10.153.58.112"
+            host_location="BUR03" sp_name="ban67uut112sp" sp_ip="10.153.59.112"
+            console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut112"
+            apc_url="http://ban67uut112apc" apc_user="ban67u112" apc_passwd="ssm" />
+    <DEVICE host_name="ban67uut114" host_type="X5-2L 12HDD" host_ip="10.153.58.114"
+            host_location="BUR03" sp_name="ban67uut114sp" sp_ip="10.153.59.114"
+            console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut114"
+            apc_url="http://ban67uut114apc" apc_user="ban67u114" apc_passwd="ssm" />
+    <DEVICE host_name="ban67uut116" host_type="X5-2L 24HDD" host_ip="10.153.58.116"
+            host_location="BUR03" sp_name="ban67uut116sp" sp_ip="10.153.59.116"
+            console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut116"
+            apc_url="http://ban67uut116apc" apc_user="ban67u116" apc_passwd="ssm" />
+    <DEVICE host_name="ban67uut118" host_type="X4170 M2" host_ip="10.153.58.118"
             host_location="BUR03" sp_name="ban67uut118sp" sp_ip="10.153.59.118"
             console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut118"
-            apc_url="http://ban67uut118" apc_user="ban67u120" apc_passwd="ssm" />
-    <DEVICE host_name="ban67uut120" host_type="X2370 M3" host_ip="10.153.58.120"
-            host_location="BUR03" sp_name="ban67uut120sp" sp_ip="10.153.59.120"
-            console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut120"
-            apc_url="http://ban67uut120" apc_user="ban67u120" apc_passwd="ssm" />
-    <DEVICE host_name="ban67uut122" host_type="X4370 M3" host_ip="10.153.58.122"
-            host_location="BUR03" sp_name="ban67uut122sp" sp_ip="10.153.59.122"
-            console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut122"
-            apc_url="http://ban67uut122" apc_user="ban67u122" apc_passwd="ssm" />
+            apc_url="http://ban67uut118apc" apc_user="ban67u118" apc_passwd="ssm" />
+    <DEVICE host_name="ban67uut126" host_type="X5-2L 8HDD" host_ip="10.153.58.126"
+            host_location="BUR03" sp_name="ban67uut126sp" sp_ip="10.153.59.126"
+            console_cmd="/import/cr-labtech/bin/ltconsole" console_name="ban67uut126"
+            apc_url="http://ban67uut126apc" apc_user="ban67u126" apc_passwd="ssm" />
 </SYSTEMS>
