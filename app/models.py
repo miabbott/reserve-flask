@@ -33,26 +33,19 @@ class System(db.Model):
     def get_all_reservations(self):
         return reservations.all()
     
-    def is_reserved(self, date=None, time=None):        
-        res = self.reservations.filter(Reservation.start_date == date).all()
+    def is_reserved(self, res_datetime=None):        
+        res = self.reservations.filter(Reservation.res_datetime == res_datetime).all()
 
         if len(res) == 0:
             return None
-        else: 
-            for r in res:
-                if time >= r.start_time and time <= r.end_time:
-                    return r.reserved_by
 
-        return None
+        return res[0]
 
 class Reservation(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    start_date = db.Column(db.Date)
-    start_time = db.Column(db.Time)
-    end_date = db.Column(db.Date)
-    end_time = db.Column(db.Time)
+    res_datetime = db.Column(db.DateTime, index=True)
     reserved_by = db.Column(db.String, index = True)
     system_id = db.Column(db.Integer, db.ForeignKey('system.id'))
     
     def __repr__(self):
-        return '<Reservation - ID: %s; StartDate: %s; StartTime: %s; EndDate: %s; EndTime: %s; ReservedBy: %s; Device: %s>' % (self.id, self.start_date, self.start_time, self.end_date, self.end_time, self.reserved_by, self.device)
+        return '<Reservation - ID: %s; DateTime: %s; ReservedBy: %s; Device: %s>' % (self.id, self.res_datetime, self.reserved_by, self.device)

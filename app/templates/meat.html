@@ -4,12 +4,12 @@
         {% for sys,res in matrix[hr] %}
             {% if res == None %}
                 <td>
-                    <a href="{{ url_for('reserve', system = sys.id, start_time = hr.strftime("%H"), hours = 0) }}">1</a>
-                    <a href="{{ url_for('reserve', system = sys.id, start_time = hr.strftime("%H"), hours = 1) }}">2</a>
-                    <a href="{{ url_for('reserve', system = sys.id, start_time = hr.strftime("%H"), hours = 2) }}">3</a>
+                    <a href="{{ url_for('reserve', system = sys.id, res_date = date_str, res_time = hr.strftime("%H"), hours = 1) }}">1</a>
+                    <a href="{{ url_for('reserve', system = sys.id, res_date = date_str, res_time = hr.strftime("%H"), hours = 2) }}">2</a>
+                    <a href="{{ url_for('reserve', system = sys.id, res_date = date_str, res_time = hr.strftime("%H"), hours = 3) }}">3</a>
                 </td>
             {% else %}
-                <td>{{ res }}</td>
+                <td><a href="{{url_for('delete', res_id = res.id) }}">{{ res.reserved_by }}</a></td>
             {% endif %}
         {% endfor %}
         <td>{{ hr.strftime("%H:%M %p") }}</td>

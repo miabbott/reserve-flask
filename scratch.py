@@ -12,9 +12,17 @@ from datetime import date, time, datetime, timedelta
 
 #print b118.reservations.filter(Reservation.start_date == start_d).all()
 
-print System.query.all()
+#print System.query.all()
 #print Reservation.query.all()
 
+b090 = System.query.get(2)
+#print b090
+
+d = date.today()
+t = time(hour=18)
+dt = datetime.combine(d,t)
+
+print b090.is_reserved(res_datetime=dt)
 
 #print b118.is_reserved(date=start_d, time=time)
 
