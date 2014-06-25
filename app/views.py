@@ -32,6 +32,8 @@ def login():
 def delete():
     res_id = request.args.get('res_id')
     reservation = Reservation.query.get(res_id)
+    user_id = reservation.reserved_by
+    sys_id = reservation.device.id
     
     date = reservation.res_datetime.date().isoformat()
     #date_str = str(date.year) + "-" + str(date.month) + "-" + str(date.day)
@@ -76,7 +78,7 @@ def reserve():
 @app.route('/hours/')
 @app.route('/hours/<date_str>')
 def hours(date_str = None):
-    # determine the date to query; if None use today
+    # determine the date to query; if None use today()
     if date_str is None:
         date_str = date.today()
     else:
@@ -92,7 +94,7 @@ def hours(date_str = None):
     # build a list of 24 hours
     # TODO: make start time configurable
     hour_list = []
-    start_t = datetime.combine(date.today(), time(hour=18))
+    start_t = datetime.combine(date.today(), time(hour=0))
     for hr in range(24):
         new_t = start_t + timedelta(hours=hr)
         hour_list.append(new_t.time())

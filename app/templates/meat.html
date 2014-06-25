@@ -8,8 +8,10 @@
                     <a href="{{ url_for('reserve', system = sys.id, res_date = date_str, res_time = hr.strftime("%H"), hours = 2) }}">2</a>
                     <a href="{{ url_for('reserve', system = sys.id, res_date = date_str, res_time = hr.strftime("%H"), hours = 3) }}">3</a>
                 </td>
-            {% else %}
+            {% elif res.reserved_by == session['name'] %}
                 <td><a href="{{url_for('delete', res_id = res.id) }}">{{ res.reserved_by }}</a></td>
+            {% else %}
+                <td>{{ res.reserved_by }}</td>
             {% endif %}
         {% endfor %}
         <td>{{ hr.strftime("%H:%M %p") }}</td>
