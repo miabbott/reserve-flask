@@ -1,19 +1,19 @@
 {% for hr in hour_list %}
     <tr>
-        <td>{{ hr.strftime("%H:%M %p") }}</td>
+        <td class="exterior">{{ hr.strftime("%H:%M%p") }}&nbsp;EST</td>
         {% for sys,res in matrix[hr] %}
             {% if res == None %}
-                <td>
+                <td class="available">
                     <a href="{{ url_for('reserve', system = sys.id, res_date = date_str, res_time = hr.strftime("%H"), hours = 1) }}">1</a>
                     <a href="{{ url_for('reserve', system = sys.id, res_date = date_str, res_time = hr.strftime("%H"), hours = 2) }}">2</a>
                     <a href="{{ url_for('reserve', system = sys.id, res_date = date_str, res_time = hr.strftime("%H"), hours = 3) }}">3</a>
                 </td>
             {% elif res.reserved_by == session['name'] %}
-                <td><a href="{{url_for('delete', res_id = res.id) }}">{{ res.reserved_by }}</a></td>
+                <td class="reserved"><a href="{{url_for('delete', res_id = res.id) }}">{{ res.reserved_by }}</a></td>
             {% else %}
-                <td>{{ res.reserved_by }}</td>
+                <td class="reserved">{{ res.reserved_by }}</td>
             {% endif %}
         {% endfor %}
-        <td>{{ hr.strftime("%H:%M %p") }}</td>
+        <td class="exterior">{{ hr.strftime("%H:%M%p") }}&nbsp;EST</td>
     </tr>
 {% endfor %}

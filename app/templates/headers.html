@@ -1,26 +1,44 @@
 <thead>
     <tr>
-        <th />
+        <th class="exterior" />
         {% for sys in systems %}
-        <th>{{ sys.host_name }}<br />
-            {{ sys.host_ip }}<br />
-            {{ sys.sp_name }}<br />
-            {{ sys.sp_ip }}<br />
+        <th class="exterior">
+            Location:&nbsp;{{sys.host_location}}<br />
+            Type:&nbsp;{{ sys.host_type}}<br />
+            SP&nbsp;IP:&nbsp;{{ sys.sp_ip}}<br />
+            SP&nbsp;Hostname:&nbsp;{{ sys.sp_name }}<br />
+            Host&nbsp;IP:&nbsp;{{ sys.host_ip }}<br />
+            Hostname:&nbsp;{{ sys.host_name }}<br />
+            Console:&nbsp;{{ sys.console_cmd }}&nbsp;{{ sys.console_name }}<br />
+            {% if sys.apc_url != None %}
+                APC&nbsp;URL:&nbsp;{{ sys.apc_url }}<br />
+                APC&nbsp;User:&nbsp;{{ sys.apc_user }}<br />
+                APC&nbsp;Pass:&nbsp;{{ sys.apc_passwd }}<br />
+            {% endif %}
         </th>
         {% endfor %}
-        <th />
+        <th class="exterior" />
     </tr>
 </thead>
 <tfoot>
     <tr>
-        <td />
+        <td class="exterior" />
         {% for sys in systems %}
-        <td class="foot">{{ sys.host_name }}<br />
-            {{ sys.host_ip }}<br />
-            {{ sys.sp_name }}<br />
-            {{ sys.sp_ip }}<br />
+        <td class="foot">
+            Location:&nbsp;{{sys.host_location}}<br />
+            Type:&nbsp;{{ sys.host_type}}<br />
+            SP&nbsp;IP:&nbsp;{{ sys.sp_ip}}<br />
+            SP&nbsp;Hostname:&nbsp;{{ sys.sp_name }}<br />
+            Host&nbsp;IP:&nbsp;{{ sys.host_ip }}<br />
+            Hostname:&nbsp;{{ sys.host_name }}<br />
+            Console:&nbsp;{{ sys.console_cmd }}&nbsp;{{ sys.console_name }}<br />
+            {% if sys.apc_url != None %}
+                APC&nbsp;URL:&nbsp;{{ sys.apc_url }}<br />
+                APC&nbsp;User:&nbsp;{{ sys.apc_user }}<br />
+                APC&nbsp;Pass:&nbsp;{{ sys.apc_passwd }}<br />
+            {% endif %}
         </td>
         {% endfor %}
-        <td />    
+        <td class="exterior" />    
     </tr>
 </tfoot>

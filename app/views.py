@@ -26,22 +26,44 @@ def login():
         session['name'] = form.name.data
         return redirect(url_for('hours'))
     elif request.method == 'GET':
-        return render_template('login.html', form=form)
+        return render_template('login.html', form=form, now=datetime.now())
 
 @app.route('/delete')
 def delete():
+    # The way I solved the ability to delete multiple Reservations at a time
+    # was to search the table for a Reservation that had the same user and
+    # system with an hour added to the datetime.  Continue this search by
+    # adding an hour each time until no Reservation is found. This would
+    # account for the case where a user would reserve more than one hour
+    # at a time.
+    #
+    # To do this, I had to extract a bunch of data from the first Reservation
+    # and then use it to build subsequent queries on the table.
     res_id = request.args.get('res_id')
     reservation = Reservation.query.get(res_id)
     user_id = reservation.reserved_by
-    sys_id = reservation.device.id
-    
-    date = reservation.res_datetime.date().isoformat()
-    #date_str = str(date.year) + "-" + str(date.month) + "-" + str(date.day)
-    
+    sys = reservation.device
+    res_date = reservation.res_datetime
+    date_str = res_date.date().isoformat()
+ 
+    # delete first record
     db.session.delete(reservation)
+   
+    search = True
+    while search:
+        res_date = res_date + timedelta(hours=1)
+        next_res = Reservation.query.filter(Reservation.res_datetime == res_date, Reservation.reserved_by == user_id, Reservation.device == sys).all()
+    
+        if next_res:
+            db.session.delete(next_res[0])
+        else:
+            search = False
+    
+    # commit all changes    
     db.session.commit()
     
-    return redirect(url_for('hours', date_str = date))
+    # go back to the hours page for the right date
+    return redirect(url_for('hours', date_str = date_str))
 
 @app.route('/reserve/')
 def reserve():
@@ -93,6 +115,7 @@ def hours(date_str = None):
     
     # build a list of 24 hours
     # TODO: make start time configurable
+    # TODO: make time default to UTC
     hour_list = []
     start_t = datetime.combine(date.today(), time(hour=0))
     for hr in range(24):
@@ -115,4 +138,4 @@ def hours(date_str = None):
         matrix[h] = zipped
 
     # render the hours template with a date, list of hours, list of systems, and the matrix
-    return render_template('hours.html', date_str=date_str, hour_list=hour_list, systems=systems, matrix=matrix)
+    return render_template('hours.html', date_str=date_str, hour_list=hour_list, systems=systems, matrix=matrix, now=datetime.now())

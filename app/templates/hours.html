@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
+  Today is {{ now.strftime("%a, %b %d, %Y at %H:%M %p") }}
   <table border="1">
     {% include 'headers.html' %}
     {% include 'meat.html' %}

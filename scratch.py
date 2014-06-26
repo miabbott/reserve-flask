@@ -3,16 +3,21 @@ from app import db
 from app.models import System, Reservation
 from datetime import date, time, datetime, timedelta
 
-reservation = Reservation.query.get(23)
+reservation = Reservation.query.get(32)
 user_id = reservation.reserved_by
 system = reservation.device
 date = reservation.res_datetime
 
-my_res = Reservation.query.filter(Reservation.reserved_by == user_id, Reservation.device == system).all()
+search_res = True
 
+while search_res:
+    date = date + timedelta(hours=1)
+    next_res = Reservation.query.filter(Reservation.res_datetime == date, Reservation.reserved_by == user_id, Reservation.device == system).all()
 
-
-
+    if next_res:
+        print next_res
+    else:
+        search_res = False
 
 #b118 = System.query.get(1)
 #b120 = System.query.get(2)
