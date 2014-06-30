@@ -27,3 +27,10 @@ td.available {
 .exterior {
   background-color: lightgrey;
 }
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    text-align: center;
+}

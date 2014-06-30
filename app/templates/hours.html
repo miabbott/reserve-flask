@@ -2,6 +2,9 @@
 
 {% block content %}
   Today is {{ now.strftime("%a, %b %d, %Y at %H:%M %p") }}
+  <br />
+  {% include 'nav.html' %}
+  <br />
   <table border="1">
     {% include 'headers.html' %}
     {% include 'meat.html' %}

@@ -10,7 +10,7 @@ def modify():
   session.modified = True
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index/')
 def index():
     if 'name' in session:
         name = session['name']
@@ -18,7 +18,7 @@ def index():
     else:
         return redirect(url_for('login'))
 
-@app.route('/login', methods = ['GET', 'POST'])
+@app.route('/login/', methods = ['GET', 'POST'])
 def login():
     form = NameForm()
     
@@ -26,9 +26,11 @@ def login():
         session['name'] = form.name.data
         return redirect(url_for('hours'))
     elif request.method == 'GET':
-        return render_template('login.html', form=form, now=datetime.now())
+        return render_template('login.html',
+                               form=form,
+                               now=datetime.now())
 
-@app.route('/delete')
+@app.route('/delete/')
 def delete():
     # The way I solved the ability to delete multiple Reservations at a time
     # was to search the table for a Reservation that had the same user and
@@ -52,7 +54,9 @@ def delete():
     search = True
     while search:
         res_date = res_date + timedelta(hours=1)
-        next_res = Reservation.query.filter(Reservation.res_datetime == res_date, Reservation.reserved_by == user_id, Reservation.device == sys).all()
+        next_res = Reservation.query.filter(Reservation.res_datetime == res_date,
+                                            Reservation.reserved_by == user_id,
+                                            Reservation.device == sys).all()
     
         if next_res:
             db.session.delete(next_res[0])
@@ -88,7 +92,9 @@ def reserve():
 
     # iterate through the hours and create reservations
     for hr in range(hours):
-        r = Reservation(res_datetime = new_datetime + timedelta(hours = hr), reserved_by = reserved_by, device = system)
+        r = Reservation(res_datetime = new_datetime + timedelta(hours = hr),
+                        reserved_by = reserved_by,
+                        device = system)
         db.session.add(r)
 
     # commit all the records
@@ -109,6 +115,21 @@ def hours(date_str = None):
         month = int(date_list[1])
         day = int(date_list[2])
         date_str = date(year, month, day)
+
+    # build a list of dates for nav bar
+    today_dt = datetime.combine(date.today(), time(hour = 0))
+    yesterday_dt = today_dt - timedelta(days = 1)
+    tomorrow_dt = today_dt + timedelta(days = 1)
+
+    date_str_dt = datetime.combine(date_str, time(hour = 0))
+    if today_dt == date_str_dt:
+        prev_dt = date_str_dt - timedelta(days = 2)
+        next_dt = date_str_dt + timedelta(days = 2)
+    else:
+        prev_dt = date_str_dt - timedelta(days = 1)
+        next_dt = date_str_dt + timedelta(days = 1)
+    
+    date_nav_list = [prev_dt, yesterday_dt, today_dt, tomorrow_dt, next_dt]
 
     # get a list of all the systems in the DB
     systems = System.query.all()
@@ -138,4 +159,10 @@ def hours(date_str = None):
         matrix[h] = zipped
 
     # render the hours template with a date, list of hours, list of systems, and the matrix
-    return render_template('hours.html', date_str=date_str, hour_list=hour_list, systems=systems, matrix=matrix, now=datetime.now())
+    return render_template('hours.html',
+                           date_nav_list = date_nav_list,
+                           date_str = date_str,
+                           hour_list=hour_list,
+                           systems=systems,
+                           matrix=matrix,
+                           now=datetime.now())

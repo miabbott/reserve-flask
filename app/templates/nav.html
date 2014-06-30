@@ -1,0 +1,14 @@
+<div class="center">
+Schedule for:&nbsp;&nbsp;{{ date_str.strftime("%a, %b %d, %Y") }}
+<br />
+<a href="{{ url_for('hours', date_str = date_nav_list[0].strftime("%Y-%m-%d")) }}">[Prev Day ({{ date_nav_list[0].strftime("%b %d") }})]</a>
+&nbsp;&nbsp;
+<a href="{{ url_for('hours', date_str = date_nav_list[1].strftime("%Y-%m-%d")) }}">[Yesterday ({{ date_nav_list[1].strftime("%b %d") }})]</a>
+&nbsp;&nbsp;
+<a href="{{ url_for('hours', date_str = date_nav_list[2].strftime("%Y-%m-%d")) }}">[Today]</a>
+&nbsp;&nbsp;
+<a href="{{ url_for('hours', date_str = date_nav_list[3].strftime("%Y-%m-%d")) }}">[Tomorrow ({{ date_nav_list[3].strftime("%b %d") }})]</a>
+&nbsp;&nbsp;
+<a href="{{ url_for('hours', date_str = date_nav_list[4].strftime("%Y-%m-%d")) }}">[Next Day ({{ date_nav_list[4].strftime("%b %d") }})]</a>
+<br />
+</div>
